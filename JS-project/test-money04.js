@@ -13,8 +13,26 @@ class Money {
     }  
 }
 
+class Portfolio {
+    constructor() {
+        this.moneys = [];
+   }
+    add(...moneys) {
+        this.moneys = this.moneys.concat(moneys);
+    }
+
+    evaluate(currency) {
+        let total = this.moneys.reduce( (sum, money) => {
+            return sum + money.amount;
+          }, 0);
+        return new Money(total, currency);
+    }
+}
+
+let fiveDollars = new Money(5, "USD");
+let tenDollars = new Money(10, "USD");
 
 let fifteenDollars = new Money(15, "USD");
-let portfolio = new Portfolio(); 1
-portfolio.add(fiveDollars, tenDollars); 2
+let portfolio = new Portfolio();
+portfolio.add(fiveDollars, tenDollars); 
 assert.deepStrictEqual(portfolio.evaluate("USD"), fifteenDollars); 
